@@ -305,6 +305,7 @@ if ($latestXlsFile) {
     # 轉換為 iCal 格式並輸出到 .ics 檔案
     $icalContent = "BEGIN:VCALENDAR`nVERSION:2.0"
     $icalContent += "`nTZID:Asia/Taipei"
+    $icalContent += "`nX-WR-CALNAME:中華民國政府行政機關辦公日曆表"
     foreach ($cell in $matches["FiltedCells"]) {
         $monthNumber = $monthMapping[$cell.月份]
         $date = "$($cell.年份)$(($monthNumber.ToString()).PadLeft(2, '0'))$(($cell.日期).PadLeft(2, '0'))"
