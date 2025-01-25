@@ -41,19 +41,15 @@ if ($PSCommandPath -eq $null) {
 	}
 	$PSCommandPath = GetPSCommandPath
 }
-$CurrentPS1File = $(Get-Item -Path "$PSCommandPath")
-Set-Location "$($CurrentPS1File.PSParentPath)"
 
-# 獲取當前目錄
-$currentDirectory = "$($CurrentPS1File.PSParentPath)"
+#設定路徑變數
+$CurrentPS1File = $(Get-Item -Path "$PSCommandPath")
+$currentDirectory = "$("$($CurrentPS1File.PSParentPath)" + '\')"
+$OldDirectory = "$($currentDirectory + $($CurrentPS1File.BaseName) + '_Old\')"
+Set-Location $currentDirectory
+New-Item -ItemType Directory -Force -Path $OldDirectory
 
 Add-Type -AssemblyName System.Web
-
-<#
-$searchkeyword = '辦公日曆表'
-$encodedsearchkeyword = [System.Web.HttpUtility]::UrlEncode($searchkeyword)
-$dgpaurl1 = $($dgpaPre + 'search?q=' + $encodedsearchkeyword)
-#>
 
 $dgpaResp1 = Invoke-WebRequest -Uri $dgpaurl1
 $dgpaDoc1 = $dgpaResp1.ParsedHtml
@@ -323,8 +319,9 @@ if ($latestXlsFile) {
     $icalContent += "`nEND:VCALENDAR"
 
     # 輸出 iCal 檔案
-    $icalFilePath = "$($($CurrentPS1File.PSParentPath) + '\' + $($CurrentPS1File.BaseName) + '-' + $(Get-Date).ToString('yyyyMMdd-HHmmss') + '.ics')"
+    $icalFilePath = "$($OldDirectory + $($CurrentPS1File.BaseName) + '-' + $(Get-Date).ToString('yyyyMMdd-HHmmss') + '.ics')"
     Set-Content -Path $icalFilePath -Value $icalContent -Force
+    Copy-Item -Path $icalFilePath -Destination "$($currentDirectory + $($CurrentPS1File.BaseName) + '.ics')" -Force
 
 } else {
     Write-Output "當前目錄中未找到 .xls 檔案。"
