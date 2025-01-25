@@ -14,5 +14,6 @@
 ### Outlook
 1. 適用於 Microsoft 365 的 Microsoft® Outlook®MSO (64 位組建2412版本 16.0.18324.20092)
 ### Google 日曆
-1. Mozilla Firefox Browser 134.0.2（64 位元）
-2. 2025/1/25 時的 Google 日曆網頁版
+1. Google Chrome 版本 131.0.6778.267 (正式版本) (64 位元)
+2. Mozilla Firefox Browser 134.0.2（64 位元）
+3. 2025/1/25 時的 Google 日曆網頁版
