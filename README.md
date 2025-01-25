@@ -17,3 +17,4 @@
 1. Google Chrome 版本 131.0.6778.267 (正式版本) (64 位元)
 2. Mozilla Firefox Browser 134.0.2（64 位元）
 3. 2025/1/25 時的 Google 日曆網頁版
+4. Google 日曆線上訂閱 .ics 檔的 Raw URL
